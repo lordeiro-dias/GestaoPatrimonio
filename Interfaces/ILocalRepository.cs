@@ -6,6 +6,7 @@ namespace GerenciamentoPatrimonio.Interfaces
     {
         List<Local> Listar();
         Local BuscarPorId(Guid localID);
+        Local BuscarPorNome(string nomeLocal, Guid areaId);
         void Adicionar(Local local);
         bool AreaExiste(Guid areaId);
         void Atualizar(Local local);

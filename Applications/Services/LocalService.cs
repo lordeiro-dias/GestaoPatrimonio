@@ -53,6 +53,14 @@ namespace GerenciamentoPatrimonio.Applications.Services
         public void Adicionar(CriarLocalDto localDto)
         {
             Validar.ValidarNome(localDto.NomeLocal);
+
+            Local localExistente = _repository.BuscarPorNome(localDto.NomeLocal, localDto.AreaID);
+
+            if(localExistente != null)
+            {
+                throw new DomainException("Já existe um Local cadastrado com este nome nessa área.");
+            }
+
             if(!_repository.AreaExiste(localDto.AreaID))
             {
                 throw new DomainException("Área informada não existe.");
@@ -73,11 +81,18 @@ namespace GerenciamentoPatrimonio.Applications.Services
         {
             Validar.ValidarNome(localDto.NomeLocal);
 
+            Local localExistente = _repository.BuscarPorNome(localDto.NomeLocal, localDto.AreaID);
+
             Local localBanco = _repository.BuscarPorId(localId);
 
             if(localBanco == null)
             {
                 throw new DomainException("Localização não encontrada.");
+            }
+
+            if (localExistente != null)
+            {
+                throw new DomainException("Já existe um Local cadastrado com este nome nessa área.");
             }
 
             if(!_repository.AreaExiste(localDto.AreaID))

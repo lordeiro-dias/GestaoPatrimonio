@@ -23,6 +23,11 @@ namespace GerenciamentoPatrimonio.Repositories
             return _context.Local.Find(localID);
         }
 
+        public Local BuscarPorNome(string nomeLocal, Guid areaId)
+        {
+            return _context.Local.FirstOrDefault(l => l.Nome.ToLower() == nomeLocal.ToLower() && l.AreaID == areaId);
+        }
+
         public void Adicionar(Local local)
         {
             _context.Local.Add(local);
