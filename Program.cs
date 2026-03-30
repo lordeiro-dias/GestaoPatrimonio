@@ -31,6 +31,14 @@ builder.Services.AddScoped<AreaService>();
 builder.Services.AddScoped<ILocalRepository, LocalRepository>();
 builder.Services.AddScoped<LocalService>();
 
+//cidade
+builder.Services.AddScoped<ICidadeRepository, CidadeRepository>();
+builder.Services.AddScoped<CidadeService>();
+
+//bairro
+builder.Services.AddScoped<IBairroRepository, BairroRepository>();
+builder.Services.AddScoped<BairroService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

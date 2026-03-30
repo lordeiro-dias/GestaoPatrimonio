@@ -42,7 +42,7 @@ namespace GerenciamentoPatrimonio.Repositories
                 return;
             }
 
-            Cidade cidadeBanco = _context.Cidade.Include(c => c.Bairro).FirstOrDefault(c => c.CidadeID == cidade.CidadeID);
+            Cidade cidadeBanco = _context.Cidade.Find(cidade.CidadeID);
 
             if(cidadeBanco == null)
             {
@@ -51,7 +51,8 @@ namespace GerenciamentoPatrimonio.Repositories
 
             cidadeBanco.NomeCidade = cidade.NomeCidade;
             cidadeBanco.Estado = cidade.Estado;
-            
+
+            _context.SaveChanges();
 
         }
     }
