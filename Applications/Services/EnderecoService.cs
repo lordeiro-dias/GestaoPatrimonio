@@ -86,7 +86,7 @@ namespace GerenciamentoPatrimonio.Applications.Services
         {
             Validar.ValidarNome(enderecoDto.Logradouro);
 
-            Endereco enderecoExistente = _repository.BuscarPorLogradouroENumero(enderecoDto.Logradouro, enderecoDto.Numero, enderecoDto.BairroId);
+            Endereco enderecoExistente = _repository.BuscarPorLogradouroENumero(enderecoDto.Logradouro, enderecoDto.Numero, enderecoDto.BairroId, enderecoId);
             Endereco enderecoBanco = _repository.BuscarPorId(enderecoId);
 
             if (enderecoExistente != null)
