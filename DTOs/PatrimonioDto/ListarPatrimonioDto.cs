@@ -1,0 +1,21 @@
+﻿namespace GerenciamentoPatrimonio.DTOs.PatrimonioDto
+{
+    public class ListarPatrimonioDto
+    {
+        public Guid PatrimonioId { get; set; }
+
+        public string Denominacao { get; set; } = null!;
+
+        public string NumeroPatrimonio { get; set; } = null!;
+
+        public decimal? Valor { get; set; }
+
+        public string? Imagem { get; set; }
+
+        public Guid LocalID { get; set; }
+
+        public Guid TipoPatrimonioID { get; set; }
+
+        public Guid StatusPatrimonioID { get; set; }
+    }
+}

@@ -55,6 +55,18 @@ builder.Services.AddScoped<TipoPatrimonioService>();
 builder.Services.AddScoped<ITipoAlteracaoRepository, TipoAlteracaoRepository>();
 builder.Services.AddScoped<TipoAlteracaoService>();
 
+//Cargo
+builder.Services.AddScoped<ICargoRepository, CargoRepository>();
+builder.Services.AddScoped<CargoService>();
+
+//StatusPatrimonio
+builder.Services.AddScoped<IStatusPatrimonioRepository, StatusPatrimonioRepository>();
+builder.Services.AddScoped<StatusPatrimonioService>();
+
+//StatusTransferencia
+builder.Services.AddScoped<IStatusTransferenciaRepository, StatusTransferenciaRepository>();
+builder.Services.AddScoped<StatusTransferenciaService>();
+
 //Usuario
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();

@@ -1,5 +1,5 @@
 ﻿using GerenciamentoPatrimonio.Applications.Services;
-using GerenciamentoPatrimonio.DTOs.BairroDto;
+using GerenciamentoPatrimonio.DTOs.StatusTransferenciaDto;
 using GerenciamentoPatrimonio.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,31 +8,30 @@ namespace GerenciamentoPatrimonio.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BairroController : ControllerBase
+    public class StatusTransferenciaController : ControllerBase
     {
-        private readonly BairroService _service;
+        private readonly StatusTransferenciaService _service;
 
-        public BairroController(BairroService service)
+        public StatusTransferenciaController(StatusTransferenciaService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public ActionResult<List<ListarBairroDto>> Listar()
+        public ActionResult<List<ListarStatusTransferenciaDto>> Listar()
         {
-            List<ListarBairroDto> bairros = _service.Listar();
-            return Ok(bairros);
+            List<ListarStatusTransferenciaDto> statusDto = _service.Listar();
+            return Ok(statusDto);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ListarBairroDto> ObterPorId(Guid id)
+        public ActionResult<ListarStatusTransferenciaDto> BuscarPorId(Guid id)
         {
             try
             {
-                ListarBairroDto bairro = _service.ObterPorId(id);
-                return Ok(bairro);
+                ListarStatusTransferenciaDto statusDto = _service.BuscarPorId(id);
+                return Ok(statusDto);
             }
-
             catch (DomainException ex)
             {
                 return NotFound(ex.Message);
@@ -40,11 +39,11 @@ namespace GerenciamentoPatrimonio.Controllers
         }
 
         [HttpPost]
-        public ActionResult Adicionar(CriarBairroDto bairroDto)
+        public ActionResult Adicionar(CriarStatusTransferenciaDto dto)
         {
             try
             {
-                _service.Adicionar(bairroDto);
+                _service.Adicionar(dto);
                 return Created();
             }
             catch (DomainException ex)
@@ -54,11 +53,11 @@ namespace GerenciamentoPatrimonio.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Atualizar(Guid id, CriarBairroDto bairroDto)
+        public ActionResult Atualizar(Guid id, CriarStatusTransferenciaDto dto)
         {
             try
             {
-                _service.Atualizar(id, bairroDto);
+                _service.Atualizar(id, dto);
                 return NoContent();
             }
             catch(DomainException ex)
