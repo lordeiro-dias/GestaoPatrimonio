@@ -38,7 +38,7 @@ namespace GerenciamentoPatrimonio.Applications.Regras
 
         public static void ValidarCPF(string cpf)
         {
-            if (string.IsNullOrWhiteSpace(cpf))
+            if(string.IsNullOrWhiteSpace(cpf))
             {
                 throw new DomainException("CPF é obrigatório");
             }
@@ -46,9 +46,17 @@ namespace GerenciamentoPatrimonio.Applications.Regras
 
         public static void ValidarEmail(string email)
         {
-            if (string.IsNullOrWhiteSpace(email))
+            if(string.IsNullOrWhiteSpace(email))
             {
                 throw new DomainException("E-mail é obrigatório");
+            }
+        }
+        
+        public static void ValidarSenha(string senha)
+        {
+            if(string.IsNullOrWhiteSpace(senha))
+            {
+                throw new DomainException("Senha é obrigatória");
             }
         }
     }
