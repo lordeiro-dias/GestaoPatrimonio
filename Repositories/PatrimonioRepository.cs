@@ -40,11 +40,6 @@ namespace GerenciamentoPatrimonio.Repositories
             return _context.Local.Any(l => l.LocalID == localId);
         }
 
-        public bool TipoPatrimonioExiste(Guid tipoPatrimonioId)
-        {
-            return _context.TipoPatrimonio.Any(t => t.TipoPatrimonioID == tipoPatrimonioId);
-        }
-
         public bool StatusPatrimonioExiste(Guid statusPatrimonioId)
         {
             return _context.StatusPatrimonio.Any(s => s.StatusPatrimonioID == statusPatrimonioId);

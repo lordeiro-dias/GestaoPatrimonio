@@ -24,7 +24,6 @@ namespace GerenciamentoPatrimonio.Applications.Services
                 Valor = p.Valor,
                 Imagem = p.Imagem,
                 LocalID= p.LocalID,
-                TipoPatrimonioID = p.TipoPatrimonioID,
                 StatusPatrimonioID = p.StatusPatrimonioID
             }).ToList();
 
@@ -43,7 +42,6 @@ namespace GerenciamentoPatrimonio.Applications.Services
                 Valor = patrimonio.Valor,
                 Imagem = patrimonio.Imagem,
                 LocalID = patrimonio.LocalID,
-                TipoPatrimonioID = patrimonio.TipoPatrimonioID,
                 StatusPatrimonioID = patrimonio.StatusPatrimonioID
             };
         }
