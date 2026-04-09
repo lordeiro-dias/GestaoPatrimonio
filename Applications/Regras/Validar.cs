@@ -8,7 +8,7 @@ namespace GerenciamentoPatrimonio.Applications.Regras
         {
             if(string.IsNullOrWhiteSpace(nome))
             {
-                throw new DomainException("Nome é obrigatório");
+                throw new DomainException("Nome é obrigatório.");
             }
         }
 
@@ -16,7 +16,7 @@ namespace GerenciamentoPatrimonio.Applications.Regras
         {
             if(string.IsNullOrWhiteSpace(estado))
             {
-                throw new DomainException("Estado é obrigatório");
+                throw new DomainException("Estado é obrigatório.");
             }
         }
 
@@ -24,7 +24,7 @@ namespace GerenciamentoPatrimonio.Applications.Regras
         {
             if (string.IsNullOrWhiteSpace(logradouro))
             {
-                throw new DomainException("Logradouro é obrigatório");
+                throw new DomainException("Logradouro é obrigatório.");
             }
         }
 
@@ -32,7 +32,7 @@ namespace GerenciamentoPatrimonio.Applications.Regras
         {
             if (string.IsNullOrWhiteSpace(nif))
             {
-                throw new DomainException("NIF é obrigatório");
+                throw new DomainException("NIF é obrigatório.");
             }
         }
 
@@ -40,7 +40,7 @@ namespace GerenciamentoPatrimonio.Applications.Regras
         {
             if(string.IsNullOrWhiteSpace(cpf))
             {
-                throw new DomainException("CPF é obrigatório");
+                throw new DomainException("CPF é obrigatório.");
             }
         }
 
@@ -48,7 +48,7 @@ namespace GerenciamentoPatrimonio.Applications.Regras
         {
             if(string.IsNullOrWhiteSpace(email))
             {
-                throw new DomainException("E-mail é obrigatório");
+                throw new DomainException("E-mail é obrigatório.");
             }
         }
         
@@ -56,7 +56,15 @@ namespace GerenciamentoPatrimonio.Applications.Regras
         {
             if(string.IsNullOrWhiteSpace(senha))
             {
-                throw new DomainException("Senha é obrigatória");
+                throw new DomainException("Senha é obrigatória.");
+            }
+        }
+
+        public static void ValidarJustificativa(string justificativa)
+        {
+            if(string.IsNullOrWhiteSpace(justificativa))
+            {
+                throw new DomainException("Justificativa é obrigatória.");
             }
         }
     }

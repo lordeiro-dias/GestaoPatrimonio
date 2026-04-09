@@ -62,5 +62,62 @@ namespace GerenciamentoPatrimonio.Repositories
         {
             return _context.Patrimonio.Find(patrimonioId);
         }
+
+        public StatusPatrimonio BuscarStatusPatrimonioPorNome(string nomeStatus)
+        {
+            return _context.StatusPatrimonio.FirstOrDefault(s => s.Status.ToLower() == nomeStatus.ToLower());
+        }
+
+        public TipoAlteracao BuscarTipoAlteracaoPorNome(string nomeTipo)
+        {
+            return _context.TipoAlteracao.FirstOrDefault(t => t.Tipo.ToLower() == nomeTipo.ToLower());
+        }
+
+        public void Atualizar(SolicitacaoTransferencia solicitacaoTransferencia)
+        {
+            if(solicitacaoTransferencia == null)
+            {
+                return;
+            }
+
+            SolicitacaoTransferencia solicitacaoBanco = _context.SolicitacaoTransferencia.Find(solicitacaoTransferencia.SolicitacaoTransferenciaID);
+            
+            if(solicitacaoBanco == null)
+            {
+                return;
+            }
+
+            solicitacaoBanco.DataResposta = solicitacaoTransferencia.DataResposta;
+            solicitacaoBanco.StatusTransferenciaID = solicitacaoTransferencia.StatusTransferenciaID;
+            solicitacaoBanco.UsuarioIDAprovacao = solicitacaoTransferencia.UsuarioIDAprovacao;
+
+            _context.SaveChanges();
+        }
+
+        public void AtualizarPatrimonio(Patrimonio patrimonio)
+        {
+            if(patrimonio == null)
+            {
+                return;
+            }
+
+            Patrimonio patrimonioBanco = _context.Patrimonio.Find(patrimonio.PatrimonioID);
+
+            if(patrimonioBanco == null)
+            {
+                return;
+            }
+
+            patrimonioBanco.LocalID = patrimonio.LocalID;
+            patrimonioBanco.StatusPatrimonioID = patrimonio.StatusPatrimonioID;
+
+            _context.SaveChanges();
+        }
+
+        public void AdicionarLog(LogPatrimonio logPatrimonio)
+        {
+            _context.LogPatrimonio.Add(logPatrimonio);
+            _context.SaveChanges();
+        }
     }
 }
