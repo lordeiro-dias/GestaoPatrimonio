@@ -85,6 +85,10 @@ builder.Services.AddScoped<TipoAlteracaoService>();
 builder.Services.AddScoped<ICargoRepository, CargoRepository>();
 builder.Services.AddScoped<CargoService>();
 
+//Patrimonio
+builder.Services.AddScoped<IPatrimonioRepository, PatrimonioRepository>();
+builder.Services.AddScoped<PatrimonioService>();
+
 //StatusPatrimonio
 builder.Services.AddScoped<IStatusPatrimonioRepository, StatusPatrimonioRepository>();
 builder.Services.AddScoped<StatusPatrimonioService>();

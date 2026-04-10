@@ -4,6 +4,7 @@ using GerenciamentoPatrimonio.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GerenciamentoPatrimonio.Controllers
 {
@@ -38,6 +39,46 @@ namespace GerenciamentoPatrimonio.Controllers
             catch(DomainException ex)
             {
                 return NotFound(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Coordenador")]
+        [HttpPost("importar-csv")]
+        public ActionResult Adicionar(IFormFile arquivoCsv)
+        {
+            try
+            {
+                string usuarioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (string.IsNullOrWhiteSpace(usuarioIdClaim))
+                {
+                    return Unauthorized("Usuário não autenticado.");
+                }
+
+                Guid usuarioId = Guid.Parse(usuarioIdClaim);
+
+                _service.Adicionar(arquivoCsv, usuarioId);
+
+                return Created();
+            }
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Coordenador")]
+        [HttpPatch("{id}/status")]
+        public ActionResult AtualizarStatus(Guid id, AtualizarStatusPatrimonioDto dto)
+        {
+            try
+            {
+                _service.AtualizarStatus(id, dto);
+                return NoContent();
+            }
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

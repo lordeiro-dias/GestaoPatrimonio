@@ -4,6 +4,7 @@ using GerenciamentoPatrimonio.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GerenciamentoPatrimonio.Controllers
 {
@@ -34,6 +35,54 @@ namespace GerenciamentoPatrimonio.Controllers
             {
                 ListarSolicitacaoTransferenciaDto solicitacao = _service.BuscarPorId(id);
                 return Ok(solicitacao);
+            }
+            catch(DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Adicionar(CriarSolicitacaoTransferenciaDto dto)
+        {
+            try
+            {
+                string usuarioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if(usuarioIdClaim == null)
+                {
+                    return Unauthorized("Usuário não autenticado.");
+                }
+
+                Guid usuarioId = Guid.Parse(usuarioIdClaim);
+
+                _service.Adicionar(usuarioId, dto);
+                return Created();
+            }
+            catch(DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPatch("{id}/responder")]
+        public ActionResult Responder(Guid id, ResponderSolicitacaoTransferenciaDto dto)
+        {
+            try
+            {
+                string usuarioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (usuarioIdClaim == null)
+                {
+                    return Unauthorized("Usuário não autenticado.");
+                }
+
+                Guid usuarioId = Guid.Parse(usuarioIdClaim);
+                
+                _service.Responder(id, usuarioId, dto);
+                return NoContent();
             }
             catch(DomainException ex)
             {

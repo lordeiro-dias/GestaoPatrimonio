@@ -12,8 +12,6 @@
 
         public Guid LocalID { get; set; }
 
-        public Guid TipoPatrimonioID { get; set; }
-
         public Guid StatusPatrimonioID { get; set; }
     }
 }
